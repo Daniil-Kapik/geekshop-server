@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render
 
 import json
@@ -18,15 +19,26 @@ def index(request):
     return render(request, 'mainapp/index.html', context)
 
 
-def products(request):
-    # file_path = os.path.join(MODULE_DIR, 'fixtures/goods.json')
+def products(request, id_category=None, page=1):
 
     context = {'title': 'Geekshop - Товары',
-               # 'categories': json.load(open(os.path.join(MODULE_DIR, 'fixtures/navigation.json'), encoding='utf-8')),
-               # 'products': json.load(open(file_path, encoding='utf-8'))
                'categories': ProductCategory.objects.all(),
-               'products': Product.objects.all()
                }
+    if id_category:
+        products = Product.objects.filter(category_id=id_category)
+    else:
+        products = Product.objects.all()
+
+    paginator = Paginator(products, per_page=3)
+
+    try:
+        products_paginator = paginator.page(page)
+    except PageNotAnInteger:
+        products_paginator = paginator.page(1)
+    except EmptyPage:
+        products_paginator = paginator.page(paginator.num_pages)
+    context['products'] = products_paginator
+
     return render(request, 'mainapp/products.html', context)
 
 
