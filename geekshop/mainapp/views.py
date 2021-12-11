@@ -48,10 +48,10 @@ class ProductDetail(DetailView):
     template_name = 'mainapp/detail.html'
     # context_object_name = 'product'
 
-    def get_context_data(self, **kwargs):
-        """" Добавляем список категорий для вывода сайтбара с категориями на странице каталога"""
-        context = super(ProductDetail, self).get_context_data(**kwargs)
-        product = self.get_object()
-        context['product'] = product
-        return context
+    # def get_context_data(self, **kwargs):
+    #     """" Добавляем список категорий для вывода сайтбара с категориями на странице каталога"""
+    #     context = super(ProductDetail, self).get_context_data(**kwargs)
+    #     product = self.get_object()
+    #     context['product'] = product
+    #     return context
 
