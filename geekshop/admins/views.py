@@ -7,7 +7,7 @@ from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, UpdateView, CreateView, DetailView, DeleteView
 
 from admins.forms import UserAdminRegisterForm, UserAdminProfileForm, AdminCategoryCreateForm, \
-    AdminProductCreateForm
+    AdminProductCreateForm, AdminProductUpdateForm
 from authapp.models import User
 from mainapp.mixin import BaseClassContextMixin, CustomDispatchMixin
 from mainapp.models import ProductCategory, Product
@@ -108,7 +108,7 @@ class ProductListView(ListView, BaseClassContextMixin, CustomDispatchMixin):
 
 
 class ProductCreateView(CreateView, BaseClassContextMixin, CustomDispatchMixin):
-    model = ProductCategory
+    model = Product
     template_name = 'admins/admin-product-create.html'
     title = 'Админка | Создать продукт'
     form_class = AdminProductCreateForm
@@ -117,16 +117,16 @@ class ProductCreateView(CreateView, BaseClassContextMixin, CustomDispatchMixin):
 
 
 class ProductUpdateView(UpdateView, BaseClassContextMixin, CustomDispatchMixin):
-    model = ProductCategory
-    template_name = 'admins/admin-category-update-delete.html'
+    model = Product
+    template_name = 'admins/admin-product-update-delete.html'
     title = 'Админка | Редактировать продукт'
-    form_class = AdminProductCreateForm
+    form_class = AdminProductUpdateForm
     success_url = reverse_lazy('admins:admin_product')
 
 
 
 class ProductDeleteView(DeleteView, CustomDispatchMixin):
-    model = ProductCategory
+    model = Product
     template_name = 'admins/admin-users-update-delete.html'
     success_url = reverse_lazy('admins:admin_product')
 

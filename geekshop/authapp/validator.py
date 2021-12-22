@@ -3,5 +3,5 @@ from django.utils.translation import ugettext_lazy as _
 
 
 def validate_name(value):
-    if not value.isalpha():
-        raise ValidationError(_(f'Имя не может содержать цифры'), params={'value': value})
+    if not value.isdigit():
+        raise ValidationError(_(f'Имя не может содержать только цифры'), params={'value': value})
