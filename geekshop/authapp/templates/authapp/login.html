@@ -34,7 +34,7 @@
                         <label class="small mb-1" for="{{ form.password.id_for_label }}">Пароль</label>
                         {{ form.password }}
                     </div>
-{#                                        {{ form.as_p }}#}
+                    {#                                        {{ form.as_p }}#}
                     <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
                         <a class="small" href="#">Забыли пароль?</a>
                         <input class="btn btn-primary" type="submit" value="Авторизоваться">
@@ -44,6 +44,12 @@
             <div class="card-footer text-center">
                 <div class="small"><a href="{% url 'authapp:register' %}">Нужен аккаунт? Зарегистрируйся!</a></div>
             </div>
+            <button class="btn btn-round form-control">
+                <a href="{% url 'social:begin' 'vk-oauth2' %}?next=/">
+                    <i class="fab fa-vk"></i>
+                    Вход через ВКонтакте
+                </a>
+            </button>
         </div>
     </div>
 {% endblock %}
